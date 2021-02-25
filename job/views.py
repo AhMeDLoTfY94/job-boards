@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 from .models import Job,Category
-from .forms import ApplyForm
+from .forms import ApplyForm,JobForm
+from django.urls  import reverse
 def job_list(request):
     job_list = Job.objects.filter().order_by('-puplished_at')
     paginator = Paginator(job_list, 3)
@@ -21,6 +22,7 @@ def job_detail(request,slug):
             myform = form.save(commit=False)
             myform.job = job_detail
             myform.save()
+            
 
     else:
         form = ApplyForm()
@@ -32,3 +34,18 @@ def job_detail(request,slug):
     return render(request, "job_detail.html", context)
 
 
+def add_job(request):
+    if request.method=="POST":
+        form=JobForm(request.POST,request.FILES)
+        if form.is_valid():
+            myform=form.save(commit=False)
+            myform.owner=request.user
+            myform.save()
+            return redirect(reverse('job_list'))
+
+    else:
+        form=JobForm()
+    context={
+        'form':form,
+    }
+    return render(request,'add_job.html',context)
