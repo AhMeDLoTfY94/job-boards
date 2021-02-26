@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% block ac %}
+{% block content %}
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
         <div class="container">
@@ -32,14 +32,9 @@
                     </div>
 
                     <div class="apply_job_form white-bg">
-                        <h4>Post A job</h4>
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}
-                            {% buttons %}            
-                            <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
-                            {% endbuttons %}
-                        </form>
+                        
+                       {% block ac%}
+                       {% endblock %}
                         
                     </div>
                 </div>
