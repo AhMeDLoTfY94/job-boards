@@ -3,13 +3,19 @@ from django.core.paginator import Paginator
 from .models import Job,Category
 from .forms import ApplyForm,JobForm
 from django.urls  import reverse
+from django.contrib.auth.decorators import login_required
+from .filter import JobFilter
+
 def job_list(request):
     job_list = Job.objects.filter().order_by('-puplished_at')
+    filter = JobFilter(request.GET, queryset=job_list)
+    job_list=filter.qs
     paginator = Paginator(job_list, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
         "jobs": page_obj,
+        "filter":filter,
     }
     return render(request,"job_list.html",context)
 
@@ -33,7 +39,7 @@ def job_detail(request,slug):
     }
     return render(request, "job_detail.html", context)
 
-
+@login_required
 def add_job(request):
     if request.method=="POST":
         form=JobForm(request.POST,request.FILES)
