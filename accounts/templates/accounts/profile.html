@@ -34,7 +34,7 @@
                                 <li>{{profile}}</span></li>
                                 <li>Email: <span>{{profile.user.email}}</span></li>
                                 <li>Phone: <span>{{profile.phone_number}}</span></li>
-                                <li>Location: <span>California, USA</span></li>
+                                <li>Location: <span>{{profile.city}}</span></li>
                                 
                             </ul>
                             <a href="{% url 'profile_edit'%}" class="boxed-btn3 w-100" >Edit Profile</a>
