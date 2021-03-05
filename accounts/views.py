@@ -26,7 +26,6 @@ def signup(request):
 def profile(request):
     profile=Profile.objects.get(user=request.user)
 
-
     context={
         'profile':profile,
     }
