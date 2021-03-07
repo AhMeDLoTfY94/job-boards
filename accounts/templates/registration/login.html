@@ -24,6 +24,8 @@
 
   {# Assumes you setup the password_reset view in your URLconf #}
   <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-  <input class="boxed-btn3 w-100 " type="submit" value="signup" />
+
+
+  <input class="boxed-btn3 w-100" value="signup" onclick="location.href='{% url "signup" %}';" />
 
 {% endblock %}
