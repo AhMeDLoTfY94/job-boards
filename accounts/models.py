@@ -11,7 +11,7 @@ class City(models.Model):
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    city=models.ForeignKey(City,on_delete=models.CASCADE)
+    #city=models.ForeignKey(City,on_delete=models.CASCADE)
     phone_number=models.CharField(max_length=35)
     image=models.ImageField(upload_to='profile/')
 
